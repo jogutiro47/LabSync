@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabSync.Backend", "LabSync.Backend\LabSync.Backend.csproj", "{6E7B8900-01AD-469E-B350-C9F1DF3E9E06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabSync.Backend", "LabSync.Backend\LabSync.Backend.csproj", "{6E7B8900-01AD-469E-B350-C9F1DF3E9E06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabSync.Frontend", "LabSync.Frontend\LabSync.Frontend.csproj", "{0D6293AE-0561-4B43-B1FC-E85942AD789B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabSync.Shared", "LabSync.Shared\LabSync.Shared.csproj", "{CA80BEF1-8A0B-4CD1-9DEC-D4E64393AD9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabSync.Shared", "LabSync.Shared\LabSync.Shared.csproj", "{CA80BEF1-8A0B-4CD1-9DEC-D4E64393AD9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{6E7B8900-01AD-469E-B350-C9F1DF3E9E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E7B8900-01AD-469E-B350-C9F1DF3E9E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E7B8900-01AD-469E-B350-C9F1DF3E9E06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D6293AE-0561-4B43-B1FC-E85942AD789B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D6293AE-0561-4B43-B1FC-E85942AD789B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D6293AE-0561-4B43-B1FC-E85942AD789B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D6293AE-0561-4B43-B1FC-E85942AD789B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CA80BEF1-8A0B-4CD1-9DEC-D4E64393AD9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CA80BEF1-8A0B-4CD1-9DEC-D4E64393AD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA80BEF1-8A0B-4CD1-9DEC-D4E64393AD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
