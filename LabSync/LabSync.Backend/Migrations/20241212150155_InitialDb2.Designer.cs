@@ -4,6 +4,7 @@ using LabSync.Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabSync.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241212150155_InitialDb2")]
+    partial class InitialDb2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,50 +46,6 @@ namespace LabSync.Backend.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("LabSync.Shared.Entites.EPSalud", b =>
-                {
-                    b.Property<int>("EPSSaludId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("EPSSaludId"));
-
-                    b.Property<string>("AbreviaturaEPS")
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("DireccionEPS")
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<string>("EmailEPS")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<DateTime?>("FechaRegistro")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("NombreEPS")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("PaginaWeb")
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<string>("TelefonoEPS")
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
-
-                    b.Property<int>("TipoEPS")
-                        .HasColumnType("int");
-
-                    b.HasKey("EPSSaludId");
-
-                    b.ToTable("EPSaluds");
-                });
-
             modelBuilder.Entity("LabSync.Shared.Entites.Paciente", b =>
                 {
                     b.Property<int>("PacienteId")
@@ -111,9 +70,6 @@ namespace LabSync.Backend.Migrations
                     b.Property<string>("Direccion")
                         .HasMaxLength(250)
                         .HasColumnType("varchar(250)");
-
-                    b.Property<int>("EPSSaludId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("EstadoCivil")
                         .HasMaxLength(20)
@@ -157,25 +113,7 @@ namespace LabSync.Backend.Migrations
 
                     b.HasKey("PacienteId");
 
-                    b.HasIndex("EPSSaludId");
-
                     b.ToTable("Pacientes");
-                });
-
-            modelBuilder.Entity("LabSync.Shared.Entites.Paciente", b =>
-                {
-                    b.HasOne("LabSync.Shared.Entites.EPSalud", "EPSSalud")
-                        .WithMany("Pacientes")
-                        .HasForeignKey("EPSSaludId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("EPSSalud");
-                });
-
-            modelBuilder.Entity("LabSync.Shared.Entites.EPSalud", b =>
-                {
-                    b.Navigation("Pacientes");
                 });
 #pragma warning restore 612, 618
         }

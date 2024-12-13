@@ -142,6 +142,33 @@ namespace LabSync.Frontend.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record not found..
+        /// </summary>
+        public static string ERR001 {
+            get {
+                return ResourceManager.GetString("ERR001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot be deleted because it has related records..
+        /// </summary>
+        public static string ERR002 {
+            get {
+                return ResourceManager.GetString("ERR002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The record you are trying to create already exists..
+        /// </summary>
+        public static string ERR003 {
+            get {
+                return ResourceManager.GetString("ERR003", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
@@ -178,6 +205,15 @@ namespace LabSync.Frontend.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Field {0} cannot be longer than {1} characters..
+        /// </summary>
+        public static string MaxLength {
+            get {
+                return ResourceManager.GetString("MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string New {
@@ -192,6 +228,15 @@ namespace LabSync.Frontend.Shared.Resources {
         public static string NoRecords {
             get {
                 return ResourceManager.GetString("NoRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patients.
+        /// </summary>
+        public static string Patients {
+            get {
+                return ResourceManager.GetString("Patients", resourceCulture);
             }
         }
         
@@ -219,6 +264,15 @@ namespace LabSync.Frontend.Shared.Resources {
         public static string RecordSavedOk {
             get {
                 return ResourceManager.GetString("RecordSavedOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field {0} is required..
+        /// </summary>
+        public static string RequiredField {
+            get {
+                return ResourceManager.GetString("RequiredField", resourceCulture);
             }
         }
         
