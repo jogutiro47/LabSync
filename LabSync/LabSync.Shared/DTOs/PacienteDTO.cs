@@ -11,10 +11,6 @@ namespace LabSync.Shared.DTOs;
 
 public class PacienteDTO
 {
-    // TipoDocumento se representa como un enum
-    [Required(ErrorMessage = "El tipo de documento es obligatorio.")]
-    public string? TipoDocumento { get; set; }
-
     [Required(ErrorMessage = "El número de identidad es obligatorio.")]
     [StringLength(20, ErrorMessage = "El número de identidad no puede exceder los 20 caracteres.")]
     public string? NumeroIdentidad { get; set; }
@@ -31,12 +27,6 @@ public class PacienteDTO
     [DataType(DataType.Date)]
     public DateTime? FechaNacimiento { get; set; }
 
-    [Required(ErrorMessage = "El sexo es obligatorio.")]
-    public string? FormatoEdad { get; set; }
-
-    [Required(ErrorMessage = "El sexo es obligatorio.")]
-    public string? Sexo { get; set; }
-
     [StringLength(250, ErrorMessage = "La dirección no puede exceder los 250 caracteres.")]
     public string? Direccion { get; set; }
 
@@ -46,6 +36,19 @@ public class PacienteDTO
     [EmailAddress(ErrorMessage = "El correo electrónico no es válido.")]
     [StringLength(100, ErrorMessage = "El correo electrónico no puede exceder los 100 caracteres.")]
     public string? CorreoElectronico { get; set; }
+
+    //public DateTime? FechaRegistro { get; set; }
+    /*
+
+    // TipoDocumento se representa como un enum
+    [Required(ErrorMessage = "El tipo de documento es obligatorio.")]
+    public string? TipoDocumento { get; set; }
+
+    [Required(ErrorMessage = "El sexo es obligatorio.")]
+    public string? FormatoEdad { get; set; }
+
+    [Required(ErrorMessage = "El sexo es obligatorio.")]
+    public string? Sexo { get; set; }
 
     [StringLength(20, ErrorMessage = "El estado civil no puede exceder los 20 caracteres.")]
     public string? EstadoCivil { get; set; }
@@ -58,7 +61,7 @@ public class PacienteDTO
 
     public int EPSSaludId { get; set; }  // Referencia a EPSSalud
 
-    public DateTime? FechaRegistro { get; set; }
-
     public string? UserName { get; set; }
+
+    */
 }

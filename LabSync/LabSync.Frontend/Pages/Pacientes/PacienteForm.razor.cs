@@ -1,19 +1,21 @@
 using CurrieTechnologies.Razor.SweetAlert2;
+using LabSync.Frontend.Repositories;
 using LabSync.Frontend.Shared.Resources;
+using LabSync.Shared.Entites;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using LabSync.Shared.DTOs;
-using LabSync.Frontend.Repositories;
-using Microsoft.AspNetCore.Components.Routing;
+using MudBlazor;
 
 namespace LabSync.Frontend.Pages.Pacientes;
 
-public partial class PacientesForm
+public partial class PacienteForm
 {
-    private EditContext editContext = null!;
+    //private MudForm? form;
 
-    public bool FormPostedSuccessfully { get; set; } = false;
+    private EditContext editContext = null!;
 
     [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
     [Inject] private IStringLocalizer<Literals> Localizer { get; set; } = null!;
@@ -22,6 +24,8 @@ public partial class PacientesForm
     [EditorRequired, Parameter] public PacienteDTO PacienteDTO { get; set; } = null!;
     [EditorRequired, Parameter] public EventCallback OnValidSubmit { get; set; }
     [EditorRequired, Parameter] public EventCallback ReturnAction { get; set; }
+
+    public bool FormPostedSuccessfully { get; set; } = false;
 
     protected override void OnInitialized()
     {

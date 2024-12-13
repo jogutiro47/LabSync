@@ -4,6 +4,7 @@ using LabSync.Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabSync.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241213220812_InitialDb6")]
+    partial class InitialDb6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +115,7 @@ namespace LabSync.Backend.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("varchar(250)");
 
-                    b.Property<int?>("EPSSaludId")
+                    b.Property<int>("EPSSaludId")
                         .HasColumnType("int");
 
                     b.Property<int?>("EstadoCivil")
@@ -129,7 +132,7 @@ namespace LabSync.Backend.Migrations
                     b.Property<int?>("FormatoEdad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GrupoSanguineo")
+                    b.Property<int>("GrupoSanguineo")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombres")
@@ -167,7 +170,8 @@ namespace LabSync.Backend.Migrations
                     b.HasOne("LabSync.Shared.Entites.EPSalud", "EPSSalud")
                         .WithMany("Pacientes")
                         .HasForeignKey("EPSSaludId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("EPSSalud");
                 });

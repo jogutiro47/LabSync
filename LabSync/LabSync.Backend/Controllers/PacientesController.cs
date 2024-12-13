@@ -1,6 +1,7 @@
 ﻿using LabSync.Backend.Data;
 using LabSync.Backend.Repositories.Implementations;
 using LabSync.Backend.Repositories.Interfaces;
+using LabSync.Shared.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +38,17 @@ namespace LabSync.Backend.Controllers
                 return Ok(response.Result);
             }
             return NotFound(response.Message);
+        }
+
+        [HttpPost("full")]
+        public async Task<IActionResult> PostAsync(PacienteDTO pacienteDTO)
+        {
+            var action = await _pacientesRepository.AddAsync(pacienteDTO);
+            if (action.WasSuccess)
+            {
+                return Ok(action.Result);
+            }
+            return BadRequest(action.Message);
         }
     }
 }

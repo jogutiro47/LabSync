@@ -7,9 +7,9 @@ using MudBlazor;
 
 namespace LabSync.Frontend.Pages.Pacientes;
 
-public partial class PacientesCreate
+public partial class PacienteCreate
 {
-    private PacientesForm? pacientesForm;
+    private PacienteForm? pacienteForm;
     private PacienteDTO pacienteDTO = new();
 
     [Inject] private IRepository Repository { get; set; } = null!;
@@ -19,7 +19,7 @@ public partial class PacientesCreate
 
     private async Task CreateAsync()
     {
-        var responseHttp = await Repository.PostAsync("/api/pacientes", pacienteDTO);
+        var responseHttp = await Repository.PostAsync("/api/pacientes/full", pacienteDTO);
         if (responseHttp.Error)
         {
             var message = await responseHttp.GetErrorMessageAsync();
@@ -33,7 +33,7 @@ public partial class PacientesCreate
 
     private void Return()
     {
-        //PacientesForm!.FormPostedSuccessfully = true;
-        NavigationManager.NavigateTo("/pacientes");
+        pacienteForm!.FormPostedSuccessfully = true;
+        NavigationManager.NavigateTo("/teams");
     }
 }

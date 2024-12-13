@@ -4,6 +4,7 @@ using LabSync.Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabSync.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241213220520_InitialDb5")]
+    partial class InitialDb5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +115,7 @@ namespace LabSync.Backend.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("varchar(250)");
 
-                    b.Property<int?>("EPSSaludId")
+                    b.Property<int>("EPSSaludId")
                         .HasColumnType("int");
 
                     b.Property<int?>("EstadoCivil")
@@ -126,10 +129,10 @@ namespace LabSync.Backend.Migrations
                     b.Property<DateTime?>("FechaRegistro")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("FormatoEdad")
+                    b.Property<int>("FormatoEdad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GrupoSanguineo")
+                    b.Property<int>("GrupoSanguineo")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombres")
@@ -142,14 +145,14 @@ namespace LabSync.Backend.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
-                    b.Property<int?>("Sexo")
+                    b.Property<int>("Sexo")
                         .HasColumnType("int");
 
                     b.Property<string>("Telefono")
                         .HasMaxLength(15)
                         .HasColumnType("varchar(15)");
 
-                    b.Property<int?>("TipoDocumento")
+                    b.Property<int>("TipoDocumento")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
@@ -167,7 +170,8 @@ namespace LabSync.Backend.Migrations
                     b.HasOne("LabSync.Shared.Entites.EPSalud", "EPSSalud")
                         .WithMany("Pacientes")
                         .HasForeignKey("EPSSaludId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("EPSSalud");
                 });

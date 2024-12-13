@@ -1,0 +1,57 @@
+﻿<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
+
+<EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+
+    <MudTextField Label="Identificación"
+                  @bind-Value="@PacienteDTO.NumeroIdentidad"
+                  For="@(() => PacienteDTO.NumeroIdentidad)"
+                  Class="mb-4" />
+
+                  <MudDatePicker Label="Fecha Nacimiento:" 
+                   Editable="true" 
+                     @bind-Date="PacienteDTO.FechaNacimiento"
+                   Placeholder="Registra Fecha Nacimiento" />
+                    <MudFormHelperText>
+                            <ValidationMessage For="@(() => PacienteDTO.FechaNacimiento)" />
+                        </MudFormHelperText>
+
+                  <MudTextField Label="Nombres:"
+                  @bind-Value="@PacienteDTO.Nombres"
+                  For="@(() => PacienteDTO.Nombres)"
+                  Class="mb-4" />
+
+                  <MudTextField Label="Apellidos:"
+                  @bind-Value="@PacienteDTO.Apellidos"
+                  For="@(() => PacienteDTO.Apellidos)"
+                  Class="mb-4" />
+
+                  <MudTextField Label="Dirección:"
+                  @bind-Value="@PacienteDTO.Direccion"
+                  For="@(() => PacienteDTO.Direccion)"
+                  Class="mb-4" />
+                   <MudTextField Label="Teléfono:"
+                  @bind-Value="@PacienteDTO.Telefono"
+                  For="@(() => PacienteDTO.Telefono)"
+                  Class="mb-4" />
+
+                   <MudTextField Label="Email:"
+                  @bind-Value="@PacienteDTO.CorreoElectronico"
+                  For="@(() => PacienteDTO.CorreoElectronico)"
+                  Class="mb-4" />
+
+
+    <MudButton Variant="Variant.Outlined"
+               StartIcon="@Icons.Material.Filled.ArrowBack"
+               Color="Color.Info"
+               OnClick="ReturnAction">
+        @Localizer["Return"]
+    </MudButton>
+
+    <MudButton Variant="Variant.Outlined"
+               StartIcon="@Icons.Material.Filled.Check"
+               Color="Color.Primary"
+               ButtonType="ButtonType.Submit">
+        @Localizer["SaveChanges"]
+    </MudButton>
+</EditForm>
