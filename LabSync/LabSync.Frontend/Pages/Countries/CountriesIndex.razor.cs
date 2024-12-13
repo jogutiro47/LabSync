@@ -4,17 +4,29 @@ using LabSync.Frontend.Shared.Resources;
 using LabSync.Shared.Entites;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
+using MudBlazor;
+using static MudBlazor.CategoryTypes;
 
 namespace LabSync.Frontend.Pages.Countries;
 
 public partial class CountriesIndex
 {
+    private MudTable<Country> _table = new();
+    private IEnumerable<Country> Countries = new List<Country>();
+
+    private Country selectedItem1 = null;  // Cambio de tipo a Country
+    private HashSet<Country> selectedItems = new HashSet<Country>();
+
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString1 = "";
+
     [Inject] private IRepository Repository { get; set; } = null!;
     [Inject] private IStringLocalizer<Literals> Localizer { get; set; } = null!;
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
     [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
-
-    private List<Country>? Countries { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -33,48 +45,19 @@ public partial class CountriesIndex
         Countries = responseHppt.Response!;
     }
 
-    private async Task DeleteAsync(Country country)
+    private bool FilterFunc1(Country country) => FilterFunc(country, searchString1);
+
+    private bool FilterFunc(Country country, string searchString)
     {
-        var result = await SweetAlertService.FireAsync(new SweetAlertOptions
-        {
-            Title = Localizer["Confirmation"],
-            Text = string.Format(Localizer["DeleteConfirm"], Localizer["Country"], country.Name),
-            Icon = SweetAlertIcon.Question,
-            ShowCancelButton = true,
-            CancelButtonText = Localizer["Cancel"]
-        });
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
 
-        var confirm = string.IsNullOrEmpty(result.Value);
+        return country.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+               country.Id.ToString().Contains(searchString);
+    }
 
-        if (confirm)
-        {
-            return;
-        }
-
-        var responseHttp = await Repository.DeleteAsync($"api/countries/{country.Id}");
-        if (responseHttp.Error)
-        {
-            if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                NavigationManager.NavigateTo("/");
-            }
-            else
-            {
-                var mensajeError = await responseHttp.GetErrorMessageAsync();
-                await SweetAlertService.FireAsync(Localizer["Error"], mensajeError, SweetAlertIcon.Error);
-            }
-            return;
-        }
-
-        await LoadAsync();
-        var toast = SweetAlertService.Mixin(new SweetAlertOptions
-        {
-            Toast = true,
-            Position = SweetAlertPosition.BottomEnd,
-            ShowConfirmButton = true,
-            Timer = 3000,
-            ConfirmButtonText = Localizer["Yes"]
-        });
-        toast.FireAsync(icon: SweetAlertIcon.Success, message: Localizer["RecordDeletedOk"]);
+    private void PageChanged(int i)
+    {
+        _table.NavigateTo(i - 1);
     }
 }
