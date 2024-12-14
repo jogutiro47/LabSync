@@ -13,9 +13,9 @@ namespace LabSync.Frontend.Pages.Pacientes;
 
 public partial class PacienteForm
 {
-    //private MudForm? form;
-
     private EditContext editContext = null!;
+    private EPSalud selected_EPS = new();
+    private List<EPSalud>? epssaluds;
 
     [Inject] private SweetAlertService SweetAlertService { get; set; } = null!;
     [Inject] private IStringLocalizer<Literals> Localizer { get; set; } = null!;
@@ -30,6 +30,43 @@ public partial class PacienteForm
     protected override void OnInitialized()
     {
         editContext = new(PacienteDTO);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadEPSAsync();
+    }
+
+    private async Task LoadEPSAsync()
+    {
+        var responseHttp = await Repository.GetAsync<List<EPSalud>>("/api/EPSaluds/combo");
+        if (responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessageAsync();
+            await SweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+
+        epssaluds = responseHttp.Response;
+    }
+
+    private async Task<IEnumerable<EPSalud>> SearchEPS(string searchText, CancellationToken cancellationToken)
+    {
+        await Task.Delay(5);
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            return epssaluds!;
+        }
+
+        return epssaluds!
+            .Where(x => x.AbreviaturaEPS!.Contains(searchText, StringComparison.InvariantCultureIgnoreCase))
+            .ToList();
+    }
+
+    private void EPSaludChanged(EPSalud epssalud)
+    {
+        selected_EPS = epssalud;
+        PacienteDTO.EPSSaludId = epssalud.EPSSaludId;
     }
 
     private async Task OnBeforeInternalNavigation(LocationChangingContext context)

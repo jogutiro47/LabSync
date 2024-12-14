@@ -15,14 +15,13 @@ namespace LabSync.Frontend.Pages.Pacientes;
 
 public partial class PacienteIndex
 {
-    private string _normalText = "";
-
-    private bool dense = false;
+    private bool dense = true;
     private bool hover = true;
     private bool striped = false;
     private bool bordered = false;
     private string searchString1 = "";
 
+    private MudTable<Paciente> _table = new();
     private Paciente? selectedItem1 = null;  // Cambio de tipo a Country
     private HashSet<Paciente> selectedItems = new HashSet<Paciente>();
     private IEnumerable<Paciente> Countries = new List<Paciente>();
@@ -82,7 +81,7 @@ public partial class PacienteIndex
         if (result!.Canceled)
         {
             await LoadAsync();
-            //await _table.ReloadServerData();
+            await _table.ReloadServerData();
         }
     }
 }

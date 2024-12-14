@@ -20,6 +20,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<ICountriesRepository, CountriesRepository>();
 builder.Services.AddScoped<IPacientesRepository, PacientesRepository>();
+builder.Services.AddScoped<IEPSaludsRepository, EPSaludsRepository>();
 
 var app = builder.Build();
 

@@ -18,26 +18,32 @@ public class PacientesRepository : IPacientesRepository
 
     public async Task<ActionResponse<Paciente>> AddAsync(PacienteDTO pacienteDTO)
     {
-        //var country = await _context.Countries.FindAsync(teamDTO.CountryId);
-        //if (country == null)
-        //{
-        //    return new ActionResponse<Team>
-        //    {
-        //        WasSuccess = false,
-        //        Message = "ERR004"
-        //    };
-        //}
+        var eps = await _context.EPSaluds.FindAsync(pacienteDTO.EPSSaludId);
+        if (eps == null)
+        {
+            return new ActionResponse<Paciente>
+            {
+                WasSuccess = false,
+                Message = "ERR004"
+            };
+        }
 
         var paciente = new Paciente
         {
-            //Country = country,
+            TipoDocumento = pacienteDTO.TipoDocumento,
             NumeroIdentidad = pacienteDTO.NumeroIdentidad,
             Nombres = pacienteDTO.Nombres,
             Apellidos = pacienteDTO.Apellidos,
             FechaNacimiento = pacienteDTO.FechaNacimiento,
             Direccion = pacienteDTO.Direccion,
             Telefono = pacienteDTO.Telefono,
-            CorreoElectronico = pacienteDTO.CorreoElectronico
+            CorreoElectronico = pacienteDTO.CorreoElectronico,
+            GrupoSanguineo = pacienteDTO.GrupoSanguineo,
+            Sexo = pacienteDTO.Sexo,
+            EstadoCivil = pacienteDTO.EstadoCivil,
+            Alergias = pacienteDTO.Alergias,
+            EPSSalud = eps,
+            FechaRegistro = DateTime.Now
         };
 
         _context.Add(paciente);

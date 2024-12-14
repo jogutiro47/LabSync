@@ -14,7 +14,7 @@ public partial class CountriesIndex
     private MudTable<Country> _table = new();
     private IEnumerable<Country> Countries = new List<Country>();
 
-    private Country selectedItem1 = null;  // Cambio de tipo a Country
+    private Country? selectedItem1 = null;  // Cambio de tipo a Country
     private HashSet<Country> selectedItems = new HashSet<Country>();
 
     private bool dense = false;

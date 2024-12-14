@@ -16,13 +16,9 @@
             </div>
             <MudSpacer />
 
-             <MudButton Href="/pacientes/create" Variant="Variant.Filled" Color="Color.Primary">
-            @Localizer["New"] - 2  <!-- Puedes personalizar el texto aquí -->
-        </MudButton>
+       
 
-
-
-   <MudTable Items="@Countries" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="FilterFunc1" @bind-SelectedItem="selectedItem1">
+   <MudTable Items="@Countries" @ref="_table" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="FilterFunc1" @bind-SelectedItem="selectedItem1">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Pacientes</MudText>
         <MudSpacer />

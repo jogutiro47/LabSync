@@ -34,6 +34,6 @@ public partial class PacienteCreate
     private void Return()
     {
         pacienteForm!.FormPostedSuccessfully = true;
-        NavigationManager.NavigateTo("/teams");
+        NavigationManager.NavigateTo("/pacientes");
     }
 }
