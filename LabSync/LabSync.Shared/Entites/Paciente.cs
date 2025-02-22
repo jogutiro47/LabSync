@@ -59,4 +59,5 @@ public class Paciente
     public DateTime? FechaRegistro { get; set; }
 
     public string? UserName { get; set; }
+    public ICollection<Muestra>? Muestras { get; set; }
 }

@@ -4,6 +4,7 @@ using LabSync.Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabSync.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250222150048_InitialDb13")]
+    partial class InitialDb13
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,14 +135,8 @@ namespace LabSync.Backend.Migrations
                     b.Property<int>("EstadoId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<DateTime>("Fechaingreso")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("IdEntidadSolicita")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("IdMedicoOrigen")
                         .HasColumnType("longtext");
@@ -147,14 +144,14 @@ namespace LabSync.Backend.Migrations
                     b.Property<string>("MaterialEnviado")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("NroAdmision")
-                        .HasColumnType("longtext");
-
                     b.Property<int?>("PacienteId")
                         .HasColumnType("int");
 
                     b.Property<string>("Protocolo")
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("Reporte")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("MuestraId");
 
@@ -246,7 +243,7 @@ namespace LabSync.Backend.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ResultadoId"));
 
-                    b.Property<DateTime>("FechaReporte")
+                    b.Property<DateTime>("FechaRegistra")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int?>("MedicoId")

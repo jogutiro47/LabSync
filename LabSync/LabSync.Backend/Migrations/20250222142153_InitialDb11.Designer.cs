@@ -4,6 +4,7 @@ using LabSync.Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabSync.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250222142153_InitialDb11")]
+    partial class InitialDb11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,40 +90,6 @@ namespace LabSync.Backend.Migrations
                     b.ToTable("EPSaluds");
                 });
 
-            modelBuilder.Entity("LabSync.Shared.Entites.Medico", b =>
-                {
-                    b.Property<int>("MedicoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("MedicoId"));
-
-                    b.Property<string>("Apellidos")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Identificacion")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Nombres")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NroTarjetaProfesional")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("OrigenMedico")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Profesion")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RutaFirma")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("MedicoId");
-
-                    b.ToTable("Medicos");
-                });
-
             modelBuilder.Entity("LabSync.Shared.Entites.Muestra", b =>
                 {
                     b.Property<int>("MuestraId")
@@ -132,14 +101,8 @@ namespace LabSync.Backend.Migrations
                     b.Property<int>("EstadoId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<DateTime>("Fechaingreso")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("IdEntidadSolicita")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("IdMedicoOrigen")
                         .HasColumnType("longtext");
@@ -147,14 +110,14 @@ namespace LabSync.Backend.Migrations
                     b.Property<string>("MaterialEnviado")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("NroAdmision")
-                        .HasColumnType("longtext");
-
                     b.Property<int?>("PacienteId")
                         .HasColumnType("int");
 
                     b.Property<string>("Protocolo")
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("Reporte")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("MuestraId");
 
@@ -238,41 +201,6 @@ namespace LabSync.Backend.Migrations
                     b.ToTable("Pacientes");
                 });
 
-            modelBuilder.Entity("LabSync.Shared.Entites.ResultadoMuestra", b =>
-                {
-                    b.Property<int>("ResultadoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ResultadoId"));
-
-                    b.Property<DateTime>("FechaReporte")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int?>("MedicoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MuestraId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ResultadoDiagnostico")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ResultadoMacro")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ResultadoMicro")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ResultadoId");
-
-                    b.HasIndex("MedicoId");
-
-                    b.HasIndex("MuestraId");
-
-                    b.ToTable("ResultadoMuestras");
-                });
-
             modelBuilder.Entity("LabSync.Shared.Entites.Muestra", b =>
                 {
                     b.HasOne("LabSync.Shared.Entites.Paciente", "Paciente")
@@ -293,31 +221,9 @@ namespace LabSync.Backend.Migrations
                     b.Navigation("EPSSalud");
                 });
 
-            modelBuilder.Entity("LabSync.Shared.Entites.ResultadoMuestra", b =>
-                {
-                    b.HasOne("LabSync.Shared.Entites.Medico", "Medico")
-                        .WithMany()
-                        .HasForeignKey("MedicoId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("LabSync.Shared.Entites.Muestra", "Muestra")
-                        .WithMany("ResultadoMuestras")
-                        .HasForeignKey("MuestraId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Medico");
-
-                    b.Navigation("Muestra");
-                });
-
             modelBuilder.Entity("LabSync.Shared.Entites.EPSalud", b =>
                 {
                     b.Navigation("Pacientes");
-                });
-
-            modelBuilder.Entity("LabSync.Shared.Entites.Muestra", b =>
-                {
-                    b.Navigation("ResultadoMuestras");
                 });
 
             modelBuilder.Entity("LabSync.Shared.Entites.Paciente", b =>

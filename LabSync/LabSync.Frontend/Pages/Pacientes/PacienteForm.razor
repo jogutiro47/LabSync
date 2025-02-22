@@ -1,101 +1,129 @@
 ﻿@using LabSync.Shared.Entites
 @using LabSync.Shared.Enums
 
-    <NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
+<NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigation" />
 
-    <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
-        <DataAnnotationsValidator />
+<EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
 
+    <MudGrid>
+        <MudItem xs="12" md="6">
+            <MudSelect T="TipoDocumentoType?" Label="Tipo Documento:" @bind-Value="PacienteDTO.TipoDocumento">
+                <MudSelectItem T="TipoDocumentoType?" Value="null">Seleccione tipo documento</MudSelectItem>
+                @foreach (TipoDocumentoType grupo in Enum.GetValues(typeof(TipoDocumentoType)))
+                {
+                    <MudSelectItem T="TipoDocumentoType?" Value="grupo">@grupo</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
 
-        <MudSelect T="TipoDocumentoType?" Label="Tipo Documento:" @bind-Value="PacienteDTO.TipoDocumento">
-            <MudSelectItem T="TipoDocumentoType?" Value="null">Seleccione tipo documento</MudSelectItem>
-            @foreach (TipoDocumentoType grupo in Enum.GetValues(typeof(TipoDocumentoType)))
-            {
-                <MudSelectItem T="TipoDocumentoType?" Value="grupo">@grupo</MudSelectItem>
-            }
-        </MudSelect>
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Identificación"
+                          @bind-Value="@PacienteDTO.NumeroIdentidad"
+                          For="@(() => PacienteDTO.NumeroIdentidad)"
+                          Class="mb-4" />
+        </MudItem>
 
+        <MudItem xs="12" md="6">
+            <MudDatePicker Label="Fecha Nacimiento:"
+                           Editable="true"
+                           @bind-Date="PacienteDTO.FechaNacimiento"
+                           Placeholder="Registra Fecha Nacimiento" />
+        </MudItem>
 
-        <MudTextField Label="Identificación"
-                      @bind-Value="@PacienteDTO.NumeroIdentidad"
-                      For="@(() => PacienteDTO.NumeroIdentidad)"
-                      Class="mb-4" />
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Nombres:"
+                          @bind-Value="@PacienteDTO.Nombres"
+                          For="@(() => PacienteDTO.Nombres)"
+                          Class="mb-4" />
+        </MudItem>
 
-        <MudDatePicker Label="Fecha Nacimiento:"
-                       Editable="true"
-                       @bind-Date="PacienteDTO.FechaNacimiento"
-                       Placeholder="Registra Fecha Nacimiento" />
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Apellidos:"
+                          @bind-Value="@PacienteDTO.Apellidos"
+                          For="@(() => PacienteDTO.Apellidos)"
+                          Class="mb-4" />
+        </MudItem>
 
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Dirección:"
+                          @bind-Value="@PacienteDTO.Direccion"
+                          For="@(() => PacienteDTO.Direccion)"
+                          Class="mb-4" />
+        </MudItem>
 
-        <MudTextField Label="Nombres:"
-                      @bind-Value="@PacienteDTO.Nombres"
-                      For="@(() => PacienteDTO.Nombres)"
-                      Class="mb-4" />
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Teléfono:"
+                          @bind-Value="@PacienteDTO.Telefono"
+                          For="@(() => PacienteDTO.Telefono)"
+                          Class="mb-4" />
+        </MudItem>
 
-        <MudTextField Label="Apellidos:"
-                      @bind-Value="@PacienteDTO.Apellidos"
-                      For="@(() => PacienteDTO.Apellidos)"
-                      Class="mb-4" />
+        <MudItem xs="12" md="6">
+            <MudTextField Label="Email:"
+                          @bind-Value="@PacienteDTO.CorreoElectronico"
+                          For="@(() => PacienteDTO.CorreoElectronico)"
+                          Class="mb-4" />
+        </MudItem>
 
-        <MudTextField Label="Dirección:"
-                      @bind-Value="@PacienteDTO.Direccion"
-                      For="@(() => PacienteDTO.Direccion)"
-                      Class="mb-4" />
-        <MudTextField Label="Teléfono:"
-                      @bind-Value="@PacienteDTO.Telefono"
-                      For="@(() => PacienteDTO.Telefono)"
-                      Class="mb-4" />
+        <MudItem xs="12" md="6">
+            <MudSelect T="SexoType?" Label="Sexo:" @bind-Value="PacienteDTO.Sexo">
+                <MudSelectItem T="SexoType?" Value="null">Seleccione el sexo</MudSelectItem>
+                @foreach (SexoType grupo in Enum.GetValues(typeof(SexoType)))
+                {
+                    <MudSelectItem T="SexoType?" Value="grupo">@grupo</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
 
-        <MudTextField Label="Email:"
-                      @bind-Value="@PacienteDTO.CorreoElectronico"
-                      For="@(() => PacienteDTO.CorreoElectronico)"
-                      Class="mb-4" />
+        <MudItem xs="12" md="6">
+            <MudSelect T="GrupoSanguineoType?" Label="Grupo Sanguíneo" @bind-Value="PacienteDTO.GrupoSanguineo">
+                <MudSelectItem T="GrupoSanguineoType?" Value="null">Seleccione un grupo sanguíneo</MudSelectItem>
+                @foreach (GrupoSanguineoType grupo in Enum.GetValues(typeof(GrupoSanguineoType)))
+                {
+                    <MudSelectItem T="GrupoSanguineoType?" Value="grupo">@grupo</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
 
-        <MudSelect T="SexoType?" Label="Sexo:" @bind-Value="PacienteDTO.Sexo">
-            <MudSelectItem T="SexoType?" Value="null">Seleccione el sexo</MudSelectItem>
-            @foreach (SexoType grupo in Enum.GetValues(typeof(SexoType)))
-            {
-                <MudSelectItem T="SexoType?" Value="grupo">@grupo</MudSelectItem>
-            }
-        </MudSelect>
+        <MudItem xs="12" md="6">
+            <MudSelect T="EstadoCivilType?" Label="Estado civil:" @bind-Value="PacienteDTO.EstadoCivil">
+                <MudSelectItem T="EstadoCivilType?" Value="null">Seleccione el estado civil</MudSelectItem>
+                @foreach (EstadoCivilType grupo in Enum.GetValues(typeof(EstadoCivilType)))
+                {
+                    <MudSelectItem T="EstadoCivilType?" Value="grupo">@grupo</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
 
+        <MudItem xs="12">
+            <MudTextField Label="Alergias:"
+                          @bind-Value="@PacienteDTO.Alergias"
+                          For="@(() => PacienteDTO.Alergias)"
+                          Class="mb-4"
+                          Multiline="true" />
+        </MudItem>
 
-        <MudSelect T="GrupoSanguineoType?" Label="Grupo Sanguíneo" @bind-Value="PacienteDTO.GrupoSanguineo">
-            <MudSelectItem T="GrupoSanguineoType?" Value="null">Seleccione un grupo sanguíneo</MudSelectItem>
-            @foreach (GrupoSanguineoType grupo in Enum.GetValues(typeof(GrupoSanguineoType)))
-            {
-                <MudSelectItem T="GrupoSanguineoType?" Value="grupo">@grupo</MudSelectItem>
-            }
-        </MudSelect>
+        <MudItem xs="12">
+            <MudAutocomplete T="EPSalud"
+                             Label="Empresa Prestadora de Salud:"
+                             Placeholder="Selecciona una E.P.S"
+                             SearchFunc="SearchEPS"
+                             Value="selected_EPS"
+                             ValueChanged="EPSaludChanged"
+                             ToStringFunc="@(e=> e==null?null : $"{e.AbreviaturaEPS}")">
+                <ItemTemplate Context="itemContext">
+                    @itemContext.AbreviaturaEPS
+                </ItemTemplate>
+            </MudAutocomplete>
+        </MudItem>
 
-        <MudSelect T="EstadoCivilType?" Label="Estado civil:" @bind-Value="PacienteDTO.EstadoCivil">
-            <MudSelectItem T="EstadoCivilType?" Value="null">Seleccione el estado civil</MudSelectItem>
-            @foreach (EstadoCivilType grupo in Enum.GetValues(typeof(EstadoCivilType)))
-            {
-                <MudSelectItem T="EstadoCivilType?" Value="grupo">@grupo</MudSelectItem>
-            }
-        </MudSelect>
+    </MudGrid>
 
-    <MudTextField Label="Alergias:"
-                  @bind-Value="@PacienteDTO.Alergias"
-                  For="@(() => PacienteDTO.Alergias)"
-                  Class="mb-4"
-                  Multiline="true" />
-
-    <MudAutocomplete T="EPSalud"
-                     Label="Empresa Prestadora de Salud:"
-                     Placeholder="Selecciona una E.P.S"
-                     SearchFunc="SearchEPS"
-                     Value="selected_EPS"
-                     ValueChanged="EPSaludChanged"
-                     ToStringFunc="@(e=> e==null?null : $"{e.AbreviaturaEPS}")">
-        <ItemTemplate Context="itemContext">
-            @itemContext.AbreviaturaEPS
-        </ItemTemplate>
-    </MudAutocomplete>
-
-
-
+    <!-- Espacio adicional antes de los botones -->
+    <div style="height: 20px;"></div> <!-- Usando un div con altura fija para espacio adicional -->
+    <!-- Botones centrados con margen entre ellos -->
+    <div class="d-flex justify-content-center">
         <MudButton Variant="Variant.Outlined"
                    StartIcon="@Icons.Material.Filled.ArrowBack"
                    Color="Color.Info"
@@ -103,10 +131,15 @@
             @Localizer["Return"]
         </MudButton>
 
+        <!-- Usamos margin-left para separar los botones -->
+        <div style="margin-left: 10px;"></div>
+
         <MudButton Variant="Variant.Outlined"
                    StartIcon="@Icons.Material.Filled.Check"
                    Color="Color.Primary"
                    ButtonType="ButtonType.Submit">
             @Localizer["SaveChanges"]
         </MudButton>
-    </EditForm>
+    </div>
+
+</EditForm>

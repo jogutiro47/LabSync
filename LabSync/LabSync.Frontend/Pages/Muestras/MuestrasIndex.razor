@@ -1,0 +1,74 @@
+﻿@page "/MuestrasIndex"
+
+<MudContainer>
+
+    <!-- Indicador de carga -->
+    @if (isLoading)
+    {
+        <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Large" />
+
+    }
+
+
+    <div class="d-flex justify-content-between">
+
+        @* <MudButton Variant="Variant.Outlined"
+                   EndIcon="@Icons.Material.Filled.Add"
+                   Color="Color.Info" OnClick="@(() => ShowModalAsync())">
+            @Localizer["New"]
+        </MudButton> *@
+    </div>
+    <MudSpacer />
+
+
+
+    <MudTable Items="@ListaMuestras" @ref="_tablamuestras" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="FilterFunc1" @bind-SelectedItem="selectedItem1">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Muestras</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="searchString1" Placeholder="Buscar..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>IdMuestra</MudTh>
+            <MudTh>Fecha Ingreso</MudTh>
+            <MudTh>Nombres:</MudTh>
+            <MudTh>Apellidos:</MudTh>
+            <MudTh>Material:</MudTh>
+            <MudTh>Protocolo:</MudTh>
+            <MudTh>Estado:</MudTh>
+ 
+
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Id">@context!.MuestraId</MudTd>
+            <MudTd DataLabel="Fecha de Ingreso">@context!.Fechaingreso.ToString("dd/MM/yyyy")</MudTd>
+            <MudTd DataLabel="Nombres">@context!.Paciente!.Nombres</MudTd>
+            <MudTd DataLabel="Apellidos">@context!.Paciente!.Apellidos</MudTd>
+            <MudTd DataLabel="Material">@context!.MaterialEnviado</MudTd>
+            <MudTd DataLabel="Protoclo">@context!.Protocolo</MudTd>
+            <MudTd DataLabel="Estado">@context!.EstadoId</MudTd>
+
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+
+
+    <div class="d-flex flex-wrap mt-4">
+ @*        <MudSwitch @bind-Value="hover" Color="Color.Primary">Hover</MudSwitch>
+        <MudSwitch @bind-Value="dense" Color="Color.Secondary">Dense</MudSwitch>
+        <MudSwitch @bind-Value="striped" Color="Color.Tertiary">Striped</MudSwitch>
+        <MudSwitch @bind-Value="bordered" Color="Color.Warning">Bordered</MudSwitch> *@
+        <MudSpacer />
+        <div style="min-width:200px;">
+            <MudText Class="align-self-center d-inline">Selected1: @selectedItem1?.PacienteId</MudText>
+        </div>
+    </div>
+
+
+
+
+</MudContainer>
+
+

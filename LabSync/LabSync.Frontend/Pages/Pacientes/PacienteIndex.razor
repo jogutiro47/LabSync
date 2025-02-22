@@ -4,10 +4,16 @@
 <MudMainContent>
     <MudContainer MaxWidth="MaxWidth.Medium">
 
-      @* <MudTextField @bind-Value="_normalText" HelperText="@_normalText" Label="Nro de Identificación" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search"/> *@
+        <!-- Indicador de carga -->
+        @if (isLoading)
+        {
+           <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Large" /> 
+                    
+        }
+
 
         <div class="d-flex justify-content-between">
-                <MudText Typo="Typo.h6" Class="me-4"> @Localizer["Patients"]</MudText>
+                
                 <MudButton Variant="Variant.Outlined"
                            EndIcon="@Icons.Material.Filled.Add"
                            Color="Color.Info" OnClick="@(() => ShowModalAsync())">
@@ -18,7 +24,7 @@
 
        
 
-   <MudTable Items="@Countries" @ref="_table" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="FilterFunc1" @bind-SelectedItem="selectedItem1">
+   <MudTable Items="@Pacientes" @ref="_table" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="FilterFunc1" @bind-SelectedItem="selectedItem1">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Pacientes</MudText>
         <MudSpacer />
@@ -28,6 +34,7 @@
         <MudTh>Id</MudTh>
         <MudTh>Nombres</MudTh>
         <MudTh>Apellidos</MudTh>
+        <MudTh>Edad</MudTh>
         <MudTh>Telefono</MudTh>
 
     </HeaderContent>
@@ -35,6 +42,7 @@
         <MudTd DataLabel="Id">@context.NumeroIdentidad</MudTd>
         <MudTd DataLabel="Nombres">@context.Nombres</MudTd>
         <MudTd DataLabel="Apellidos">@context.Apellidos</MudTd>
+        <MudTd>@CalculateAge(context.FechaNacimiento)</MudTd> <!-- Muestra la edad calculada -->
        <MudTd DataLabel="Telefono">@context.Telefono</MudTd>
     </RowTemplate>
     <PagerContent>
