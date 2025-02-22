@@ -58,7 +58,8 @@ public partial class MuestrasIndex
         if (string.IsNullOrWhiteSpace(searchString))
             return true;
 
-        return muestra.Protocolo!.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
-       muestra.Protocolo!.Contains(searchString, StringComparison.OrdinalIgnoreCase);
+        return muestra.NroAdmision!.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+       muestra.Paciente!.Nombres!.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+       muestra.Paciente!.Apellidos!.Contains(searchString, StringComparison.OrdinalIgnoreCase);
     }
 }
